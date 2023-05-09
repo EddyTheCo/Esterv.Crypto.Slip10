@@ -2,17 +2,30 @@ cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
 
 project(testing VERSION 0.1 DESCRIPTION "diferent tests for the library" LANGUAGES CXX)
 
+find_package(qed25519 0 QUIET )
 
-add_executable(slip10 slip10.cpp)
-target_link_libraries(slip10 PRIVATE qslip10)
-add_test(NAME slip10 COMMAND slip10)
+if(NOT qed25519_FOUND AND NOT TARGET qed25519)
+include(FetchContent)
+FetchContent_Declare(
+        qed25519
+        GIT_REPOSITORY git@github.com:EddyTheCo/Qed25519.git
+        GIT_TAG v0.0.1
+        )
+FetchContent_MakeAvailable(qed25519)
+endif(NOT qed25519_FOUND AND NOT TARGET qed25519)
+
+
+foreach(app  slip10)
+add_executable(${app} ${app}.cpp)
+target_link_libraries(${app} PRIVATE qslip10 qed25519)
+add_test(NAME ${app} COMMAND ${app})
 
 if (WIN32 AND BUILD_SHARED_LIBS)
     add_custom_command(
-        TARGET  POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_RUNTIME_DLLS:slip10> $<TARGET_FILE_DIR:slip10>
+        TARGET ${app} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_RUNTIME_DLLS:${app}> $<TARGET_FILE_DIR:${app}>
         COMMAND_EXPAND_LISTS
     )
 endif ()
-
+endforeach()
 
