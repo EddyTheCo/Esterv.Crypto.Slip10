@@ -23,10 +23,10 @@ endif()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+include(cmake/FindQt.cmake)
 
 add_library(qslip10 include/crypto/qslip10.hpp qslip10.cpp)
 
-include(cmake/FindQt.cmake)
 
 target_link_libraries(qslip10 PUBLIC  Qt6::Core )
 
