@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
 include(local_conf.cmake OPTIONAL)
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-include(cmake/VersionFromGit.cmake)
 
+include(FetchContent)
+FetchContent_Declare(
+	ccommon
+	GIT_REPOSITORY https://github.com/EddyTheCo/Common.git
+	GIT_TAG main
+	)
+FetchContent_MakeAvailable(ccommon)
 version_from_git(
 	LOG       OFF
   TIMESTAMP "%Y%m%d%H%M%S"
@@ -21,14 +26,22 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
+find_package(Qt6 COMPONENTS Core)
+if (Qt6_FOUND)
+qt_standard_project_setup()
+endif(Qt6_FOUND)
 
 add_library(qslip10 include/crypto/qslip10.hpp qslip10.cpp)
 
-include(cmake/FindQt.cmake)
 
+if (Qt6_FOUND)
 target_link_libraries(qslip10 PUBLIC  Qt6::Core )
+endif(Qt6_FOUND)
 
 target_include_directories(qslip10 PUBLIC  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 	"$<INSTALL_INTERFACE:include>")
@@ -72,4 +85,8 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
     add_subdirectory(tests)
+endif()
+if(BUILD_DOCS)
+	get_target_property(build_docs cmake_build_docs SOURCES)
+	include(${build_docs})
 endif()
