@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
-
-project(testing VERSION 0.1 DESCRIPTION "diferent tests for the library" LANGUAGES CXX)
 
 find_package(qed25519 0 QUIET )
 
