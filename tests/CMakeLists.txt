@@ -1,15 +1,11 @@
 
-find_package(qed25519 0 QUIET )
-
-if(NOT qed25519_FOUND AND NOT TARGET qed25519)
-include(FetchContent)
 FetchContent_Declare(
         qed25519
         GIT_REPOSITORY https://github.com/EddyTheCo/Qed25519.git
         GIT_TAG v0.0.1
+	FIND_PACKAGE_ARGS 0 CONFIG
         )
 FetchContent_MakeAvailable(qed25519)
-endif(NOT qed25519_FOUND AND NOT TARGET qed25519)
 
 
 foreach(app  slip10)
