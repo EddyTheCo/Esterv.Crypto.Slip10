@@ -41,6 +41,7 @@ if (Qt6_FOUND)
 		)
 	install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/
 		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/Esterv
+		COMPONENT slip10
 		)
 
 	install(EXPORT ${PROJECT_NAME}-config
