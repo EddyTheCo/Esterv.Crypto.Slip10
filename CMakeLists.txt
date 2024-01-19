@@ -28,7 +28,7 @@ if (Qt6_FOUND)
 	qt_standard_project_setup()
 
 	add_library(qslip10 include/crypto/qslip10.hpp qslip10.cpp)
-
+	add_library(${PROJECT_NAME}::qslip10 ALIAS qslip10)
 	target_link_libraries(qslip10 PUBLIC  Qt6::Core )
 
 	target_include_directories(qslip10 PUBLIC  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

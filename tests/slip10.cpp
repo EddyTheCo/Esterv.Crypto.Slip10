@@ -3,7 +3,7 @@
 #include<iostream>
 #undef NDEBUG
 #include <assert.h>
-
+#include <QVector>
 
 using namespace qcrypto;
 
