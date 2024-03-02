@@ -1,12 +1,10 @@
 name: build-docs
 run-name: ${{ github.actor }} ${{ github.event_name }} to ${{ github.base_ref }}
-on:
-  push:
-    tags:
-      - 'v*'
+on: push
+
 jobs:
   build_doxygen:
-    uses: EddyTheCo/Common/.github/workflows/build-docs.yml@v0.1.2
+    uses: EddyTheCo/Common/.github/workflows/build-docs.yml@add_multiple_version
     permissions:
       pages: write
       id-token: write
