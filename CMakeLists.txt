@@ -6,7 +6,7 @@ include(FetchContent)
 FetchContent_Declare(
 	ccommon
 	GIT_REPOSITORY https://github.com/EddyTheCo/Common.git
-	GIT_TAG add_multiple_version
+	GIT_TAG develop
 	)
 FetchContent_MakeAvailable(ccommon)
 version_from_git(
@@ -28,6 +28,7 @@ if (Qt6_FOUND)
 	qt_standard_project_setup()
 
 	add_library(qslip10 include/crypto/qslip10.hpp qslip10.cpp)
+	set_target_properties(qslip10 PROPERTIES VERSION ${VERSION} SOVERSION ${VERSION_MAJOR})
 	add_library(${PROJECT_NAME}::qslip10 ALIAS qslip10)
 	target_link_libraries(qslip10 PUBLIC  Qt6::Core )
 
@@ -77,9 +78,9 @@ if (Qt6_FOUND)
 		endif(NOT BUILD_SHARED_LIBS)
 		include(CPack)
 	endif()
-	#	if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
-	#	add_subdirectory(tests)
-	# endif()
+	if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
+		add_subdirectory(tests)
+	endif()
 endif(Qt6_FOUND)
 if(BUILD_DOCS)
 	build_docs()
