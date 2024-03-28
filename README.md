@@ -1,4 +1,8 @@
+
 # Universal private key derivation from master private key 
+
+
+[TOC]
 
 This repo produce a library for deriving private keys from a master key following this [slip](https://github.com/satoshilabs/slips/blob/master/slip-0010.md).
 This repo only works with ed25519 curve types.
@@ -30,8 +34,8 @@ include(FetchContent)
 FetchContent_Declare(
 	QtSlip10	
 	GIT_REPOSITORY https://github.com/EddyTheCo/Qslip10.git
-	GIT_TAG v0.1.0 
-	FIND_PACKAGE_ARGS 0.1 CONFIG  
+	GIT_TAG vMAJOR.MINOR.PATCH 
+	FIND_PACKAGE_ARGS MAJOR.MINOR CONFIG  
 	)
 FetchContent_MakeAvailable(QtSlip10)
 target_link_libraries(<target> <PRIVATE|PUBLIC|INTERFACE> QtSlip10::qslip10)
