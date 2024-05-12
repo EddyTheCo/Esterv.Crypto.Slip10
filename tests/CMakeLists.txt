@@ -2,8 +2,8 @@
 FetchContent_Declare(
         qed25519
         GIT_REPOSITORY https://github.com/EddyTheCo/Qed25519.git
-        GIT_TAG v0.0.1
-	FIND_PACKAGE_ARGS 0 CONFIG
+        GIT_TAG v0.1.0
+	FIND_PACKAGE_ARGS 0.1 CONFIG
         )
 FetchContent_MakeAvailable(qed25519)
 
@@ -20,5 +20,6 @@ if (WIN32 AND BUILD_SHARED_LIBS)
         COMMAND_EXPAND_LISTS
     )
 endif ()
+
 endforeach()
 
