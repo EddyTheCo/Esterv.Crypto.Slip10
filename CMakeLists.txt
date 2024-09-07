@@ -6,14 +6,14 @@ include(FetchContent)
 FetchContent_Declare(
   ccommon
   GIT_REPOSITORY https://github.com/EddyTheCo/Common.git
-  GIT_TAG v0.4.0)
+  GIT_TAG v0.4.1)
 FetchContent_MakeAvailable(ccommon)
 version_from_git(LOG OFF TIMESTAMP "%Y%m%d%H%M%S")
 
 project(
-  QtSlip10
+	EstervSlip10
   VERSION ${VERSION}
-  DESCRIPTION "Slip10  library "
+  DESCRIPTION "Slip10  library"
   LANGUAGES CXX)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -27,26 +27,26 @@ find_package(Qt6 COMPONENTS Core)
 if(Qt6_FOUND)
   qt_standard_project_setup()
 
-  add_library(qslip10 include/crypto/qslip10.hpp qslip10.cpp)
-  add_library(${PROJECT_NAME}::qslip10 ALIAS qslip10)
-  set_target_properties(qslip10 PROPERTIES VERSION ${VERSION} SOVERSION
+  add_library(slip10 include/esterv/crypto/slip10.hpp src/slip10.cpp)
+  add_library(Esterv::slip10 ALIAS slip10)
+  set_target_properties(slip10 PROPERTIES VERSION ${VERSION} SOVERSION
                                                               ${VERSION_MAJOR})
-  target_link_libraries(qslip10 PUBLIC Qt6::Core)
+  target_link_libraries(slip10 PUBLIC Qt6::Core)
 
   target_include_directories(
-    qslip10 PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    slip10 PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
                    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/Esterv/>")
 
   install(
-    TARGETS qslip10
+    TARGETS slip10
     EXPORT ${PROJECT_NAME}-config
     DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    COMPONENT slip10
-    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT slip10)
+    COMPONENT ${PROJECT_NAME} 
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT ${PROJECT_NAME})
   install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/Esterv
-    COMPONENT ${PROJECT_NAME})
+    COMPONENT ${PROJECT_NAME}-dev)
   build_exports()
   if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     build_cpack()
