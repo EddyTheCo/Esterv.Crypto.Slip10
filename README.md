@@ -1,5 +1,4 @@
-
-# Universal private key derivation from master private key 
+# Esterv.Crypto.Slip10
 
 [TOC]
 

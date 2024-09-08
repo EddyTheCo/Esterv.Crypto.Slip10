@@ -5,7 +5,7 @@ FetchContent_Declare(
   FIND_PACKAGE_ARGS 0.1 CONFIG)
 FetchContent_MakeAvailable(EstervEd25519)
 
-foreach(app slip10)
+foreach(app slip10_test)
   add_executable(${app} ${app}.cpp)
   target_link_libraries(${app} PRIVATE slip10 Esterv::ed25519)
   add_test(NAME ${app} COMMAND ${app})

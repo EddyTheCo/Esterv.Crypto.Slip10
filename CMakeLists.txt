@@ -6,7 +6,7 @@ include(FetchContent)
 FetchContent_Declare(
   ccommon
   GIT_REPOSITORY https://github.com/EddyTheCo/Common.git
-  GIT_TAG v0.4.1)
+  GIT_TAG ndk26)
 FetchContent_MakeAvailable(ccommon)
 version_from_git(LOG OFF TIMESTAMP "%Y%m%d%H%M%S")
 
@@ -35,7 +35,7 @@ if(Qt6_FOUND)
 
   target_include_directories(
     slip10 PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-                   "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/Esterv/>")
+                   "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
   install(
     TARGETS slip10
@@ -45,7 +45,7 @@ if(Qt6_FOUND)
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT ${PROJECT_NAME})
   install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/Esterv
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     COMPONENT ${PROJECT_NAME}-dev)
   build_exports()
   if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)

@@ -1,11 +1,11 @@
-#include "crypto/qed25519.hpp"
-#include "crypto/qslip10.hpp"
+#include "esterv/crypto/ed25519.hpp"
+#include "esterv/crypto/slip10.hpp"
 #include <iostream>
 #undef NDEBUG
 #include <QVector>
 #include <assert.h>
 
-using namespace qcrypto;
+using namespace Esterv::Crypto;
 
 int main(int argc, char **argv)
 {
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     assert(keys.chain_code() ==
            QByteArray::fromHex("68789923a0cac2cd5a29172a475fe9e0fb14cd6adb5ad98a3fa70333e7afa230"));
 
-    auto edkeys = qed25519::create_keypair(keys.secret_key());
+    auto edkeys = Ed25519::create_keypair(keys.secret_key());
     assert(keys.secret_key() ==
            QByteArray::fromHex("8f94d394a8e8fd6b1bc2f3f49f5c47e385281d5c17e65324b0f62483e37e8793"));
     assert(edkeys.first == QByteArray::fromHex("3c24da049451555d51a7014a37337aa4e12d41e485abccfa46b47dfb2af54b7a"));
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
     assert(keys.chain_code() ==
            QByteArray::fromHex("5d70af781f3a37b829f0d060924d5e960bdc02e85423494afc0b1a41bbe196d4"));
 
-    edkeys = qed25519::create_keypair(keys.secret_key());
+    edkeys = Ed25519::create_keypair(keys.secret_key());
     assert(keys.secret_key() ==
            QByteArray::fromHex("551d333177df541ad876a60ea71f00447931c0a9da16f227c11ea080d7391b8d"));
     assert(edkeys.first == QByteArray::fromHex("47150c75db263559a70d5778bf36abbab30fb061ad69f69ece61a72b0cfa4fc0"));
