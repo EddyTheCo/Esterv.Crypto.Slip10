@@ -11,7 +11,7 @@ FetchContent_MakeAvailable(ccommon)
 version_from_git(LOG OFF TIMESTAMP "%Y%m%d%H%M%S")
 
 project(
-	EstervSlip10
+  EstervSlip10
   VERSION ${VERSION}
   DESCRIPTION "Slip10  library"
   LANGUAGES CXX)
@@ -30,18 +30,18 @@ if(Qt6_FOUND)
   add_library(slip10 include/esterv/crypto/slip10.hpp src/slip10.cpp)
   add_library(Esterv::slip10 ALIAS slip10)
   set_target_properties(slip10 PROPERTIES VERSION ${VERSION} SOVERSION
-                                                              ${VERSION_MAJOR})
+                                                             ${VERSION_MAJOR})
   target_link_libraries(slip10 PUBLIC Qt6::Core)
 
   target_include_directories(
     slip10 PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-                   "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
+                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
   install(
     TARGETS slip10
     EXPORT ${PROJECT_NAME}-config
     DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    COMPONENT ${PROJECT_NAME} 
+    COMPONENT ${PROJECT_NAME}
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT ${PROJECT_NAME})
   install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/

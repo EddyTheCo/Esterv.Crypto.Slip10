@@ -2,8 +2,7 @@
 
 #include <QByteArray>
 
-namespace Esterv::Crypto
-{
+namespace Esterv::Crypto {
 
 /*! \brief Universal private key derivation from master private key
  *
@@ -11,20 +10,13 @@ namespace Esterv::Crypto
  * Following https://github.com/satoshilabs/slips/blob/master/slip-0010.md
  *
  */
-class slip10_key_t : public QByteArray
-{
+class slip10_key_t : public QByteArray {
 
-    using QByteArray::QByteArray;
+  using QByteArray::QByteArray;
 
-  public:
-    QByteArray secret_key(void) const
-    {
-        return QByteArray(data(), 32);
-    };
-    QByteArray chain_code(void) const
-    {
-        return QByteArray(data() + 32, 32);
-    };
+public:
+  QByteArray secret_key(void) const { return QByteArray(data(), 32); };
+  QByteArray chain_code(void) const { return QByteArray(data() + 32, 32); };
 };
 /*!
  *
@@ -34,21 +26,20 @@ class slip10_key_t : public QByteArray
  * Allows to get extended keys derived from the master key.
  *
  */
-class Master_key : public slip10_key_t
-{
+class Master_key : public slip10_key_t {
 
-  public:
-    // Creates a Master key from seed
-    /*!
-     * Creates a Master key from seed byte sequence of 128 to 512 bits in length. This is the same as the seed byte
-     sequence used in BIP-0032
+public:
+  // Creates a Master key from seed
+  /*!
+   * Creates a Master key from seed byte sequence of 128 to 512 bits in length.
+   This is the same as the seed byte sequence used in BIP-0032
 
-     */
-    Master_key(const QByteArray &seed);
+   */
+  Master_key(const QByteArray &seed);
 
-  public:
-    // Return derived private keys form path
-    slip10_key_t slip10_key_from_path(const QVector<quint32> &path) const;
+public:
+  // Return derived private keys form path
+  slip10_key_t slip10_key_from_path(const QVector<quint32> &path) const;
 };
 
-} // namespace qcrypto
+} // namespace Esterv::Crypto
