@@ -1,13 +1,13 @@
 FetchContent_Declare(
-  qed25519
-  GIT_REPOSITORY https://github.com/EddyTheCo/Qed25519.git
-  GIT_TAG v0.1.0
+	EstervEd25519
+	GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.Crypto.Ed25519.git
+  GIT_TAG develop 
   FIND_PACKAGE_ARGS 0.1 CONFIG)
-FetchContent_MakeAvailable(qed25519)
+FetchContent_MakeAvailable(EstervEd25519)
 
-foreach(app slip10)
+foreach(app slip10_test)
   add_executable(${app} ${app}.cpp)
-  target_link_libraries(${app} PRIVATE qslip10 qed25519)
+  target_link_libraries(${app} PRIVATE slip10 Esterv::ed25519)
   add_test(NAME ${app} COMMAND ${app})
 
   if(WIN32 AND BUILD_SHARED_LIBS)

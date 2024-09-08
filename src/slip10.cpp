@@ -1,7 +1,7 @@
-#include "crypto/qslip10.hpp"
+#include "esterv/crypto/slip10.hpp"
 #include <QIODevice>
 #include <QMessageAuthenticationCode>
-namespace qcrypto
+namespace Esterv::Crypto
 {
 #define BIP32_HARDENED (1UL << 31)
 

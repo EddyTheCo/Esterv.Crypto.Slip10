@@ -2,7 +2,7 @@
 
 #include <QByteArray>
 
-namespace qcrypto
+namespace Esterv::Crypto
 {
 
 /*! \brief Universal private key derivation from master private key
