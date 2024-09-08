@@ -1,7 +1,7 @@
 FetchContent_Declare(
 	EstervEd25519
 	GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.Crypto.Ed25519.git
-  GIT_TAG align 
+  GIT_TAG develop 
   FIND_PACKAGE_ARGS 0.1 CONFIG)
 FetchContent_MakeAvailable(EstervEd25519)
 
